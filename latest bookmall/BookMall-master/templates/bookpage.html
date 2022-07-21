@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block title%}Pathshalas | {{book.book_name}} {% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+{% block mains %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4" style="width: 20%;max-width: 100%;height: 25%;">
+            <div class="row">
+                <img src="/media//{{book.book_image}}" width="200px" height="233px">            
+            </div>
+            <div class="row my-3" style="display: flex;flex-direction: row;flex-wrap: nowrap;">
+                <button class="btn btn-primary mx-3" style="width: 8vw;margin-top: 4vw;">Buy Now</button>
+                <button class="btn btn-primary" style="width: 8vw;margin-top: 4vw;">Add To Cart</button>
+            </div>
+
+        </div>
+        <div class="col-md-8" style="padding-left: 20vw;">
+            <h4>{{book.book_name}}</h4>
+            <p style="margin-top: 2vw;"><b>Price : Rs.{{book.book_price}} </b></p>
+            <p style="margin-top: 2vw;"> <b>Author of the book is {{book.book_author}}</b></p>
+            <p style="margin-top: 3vw;"> <b>Descripton of book is : </b>{{description}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%} {% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{%block title%} My Awesome Cart {% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+
+{% block mains %}
+<div class="container my-2" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+<div class="row">
+
+
+      <img src="/media/wapp.jpeg" alt="Flowers in Chania" width="460" height="345">
+
+
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3"  >Sell your items</h4>
+          <form class="needs-validation" novalidate="" method="post" action="checkout">
+            {% csrf_token %}
+             <div class="row">
+              <div class="mb-3">
+                <label for="name">Book name</label>
+                <input type="name" class="form-control" id="name" name="name" placeholder=""  required="">
+                <div class="invalid-feedback">
+                  Valid  name is required.
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="mb-3">
+              <label for="name">Author name <span class="text-muted"></span></label>
+              <input type="name" class="form-control" id="name1" name="name" placeholder="">
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+
+              <div class="mb-3">
+              <label for="name">Edition Name <span class="text-muted"></span></label>
+              <input type="name" class="form-control" id="name2" name="name" placeholder="">
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+
+
+
+<!--            <div class="mb-3">-->
+<!--              <label for="address">Address</label>-->
+<!--              <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required="">-->
+<!--              <div class="invalid-feedback">-->
+<!--                Please enter your shipping address.-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="mb-3">-->
+<!--              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>-->
+<!--              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">-->
+<!--               <input name="price" hidden type="text"  id="price1" value="" >-->
+<!--            </div>-->
+
+
+
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="state">Your State</label>
+                <select class="custom-select d-block w-100" id="state" name="state" required="">
+                  <option value="">Choose...</option>
+                  <option>Delhi</option>
+                    <option>Rajasthan</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="city">Your City</label>
+                <select class="custom-select d-block w-100" id="city" name="city" required="">
+                  <option value="">Choose...</option>
+                  <option>Jaipur</option>
+                    <option>Bharatpur</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid city.
+                </div>
+              </div>
+
+              <div class="col-md-3 mb-3">
+                <label for="zip_code">Zip</label>
+                <input type="number" class="form-control" id="zip_code" name="zip_code" placeholder="" required="">
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+
+              <form>
+                 <div class="form-group">
+                 <label for="exampleFormControlFile1">Select image</label><br>
+                     <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+              </form>
+
+            </div>
+
+             <div class=" mb-3">
+              <br><label for="phone">Phone <span class="text-muted"></span></label>
+              <input type="text" class="form-control" name="phone" id="phone" >
+              <div class="invalid-feedback">
+                Please enter a valid phone number for shipping updates.
+              </div>
+            </div>
+
+<!--            <hr class="mb-4">-->
+<!--            <div class="custom-control custom-checkbox">-->
+<!--              <input type="checkbox" class="custom-control-input" id="same-address">-->
+<!--              <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>-->
+<!--            </div>-->
+<!--            <div class="custom-control custom-checkbox">-->
+<!--              <input type="checkbox" class="custom-control-input" id="save-info">-->
+<!--              <label class="custom-control-label" for="save-info">Save this information for next time</label>-->
+<!--            </div>-->
+<!--            <hr class="mb-4">-->
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to sell</button>
+
+          </form>
+        </div>
+      </div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+
+   var ksp = sessionStorage.getItem("ftp");
+
+   document.getElementById("price").innerHTML = ksp;
+
+   document.getElementById("price1").value=ksp;
+
+
+
+   $('#itemsJson').val(JSON.stringify(cart));
+   {% if thank %}
+    alert("Thanks for Selecting ,Now Go to Payment Section")
+    localStorage.clear();
+    document.location="/payment";
+    {%endif%}
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>SIGN UP FORM</title>
+        <link rel="stylesheet" text="text/css" href="/static/css-20200613T143832Z-001/css/style.css">
+
+        <body>
+
+            <div class="Sign-Up-Form">
+                <img src="/static/user-Icon.png">
+                <h1>SIGN UP FORM</h1>
+
+                <form action="signup" method="post" onsubmit="return test()" >
+                    {% csrf_token %}
+                    <input type="name" class="input-box" name="username" placeholder="Your name">
+                   <input type="email" class="input-box" name="email" placeholder="Your Email">
+                   <input type="password" class="input-box" name="password" id="password" placeholder="Your password">
+                    <input type="password" class="input-box" name = "cpassword" id="confirmpwd" placeholder="Confirm password">
+                   <p><span><input type="checkbox"></span>I Agree to the terms of services.</p>
+                   <button type="submit" class="signup-btn">SIGN UP</button>
+                   <hr> 
+                   <p class="or">OR</p> 
+
+                  <p>Do you have an account ? <a href="/login">Login</a></p>
+                </form>
+        </body>
+        <script>
+            function test() {
+            var pwd = document.getElementById("password").value;
+            var cpwd = document.getElementById("confirmpwd").value;
+            if(pwd == cpwd)
+            {
+            return true;
+            }
+            else
+            {
+            alert("Password and Confirm pssword are incorrect")
+            return false;
+            }
+           }
+        </script>
+
+
+
+    </head>
+    </html>

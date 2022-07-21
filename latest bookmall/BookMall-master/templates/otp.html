@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>SIGN UP FORM</title>
+        <link rel="stylesheet" text="text/css" href="/static/css-20200613T143832Z-001/css/style.css">
+
+        <body>
+
+            <div class="Sign-Up-Form">
+                <img src="/static/user-Icon.png">
+                <h1>SIGN UP FORM</h1>
+
+                <form action="otp" method="post" onsubmit="return test()" >
+                    {% csrf_token %}
+                  <input type="name" class="input-box" name="Onetimepass" placeholder="Enter OTP">
+                   <button type="submit" class="signup-btn">SIGN UP</button>
+                   <hr> 
+                </form>
+        </body>
+
+
+
+    </head>
+    </html>

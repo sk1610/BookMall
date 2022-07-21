@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{%block title%}BookMall | About Us {% endblock %}
+
+{% block css %}
+
+.about-section {
+padding: 50px;
+text-align: center;
+background-color: #474e5d;
+color: white;
+}
+
+.column {
+float: left;
+width: 33.3%;
+margin-bottom: 16px;
+padding: 0 8px;
+}
+
+.card {
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+margin: 8px;
+}
+
+.container {
+padding: 0 16px;
+}
+
+.container::after, .row::after {
+content: "";
+clear: both;
+display: table;
+}
+
+.title {
+color: grey;
+}
+
+.button {
+border: none;
+outline: 0;
+display: inline-block;
+padding: 8px;
+color: white;
+background-color: #000;
+text-align: center;
+cursor: pointer;
+width: 100%;
+}
+
+.foot{
+    position: inherit;
+}
+
+.button:hover {
+background-color: #555;
+}
+
+@media screen and (max-width: 650px) {
+.column {
+width: 100%;
+display: block;
+}
+}
+
+
+{% endblock %}
+
+{% block mains %}
+
+<div class="container-fluid">
+    <div class="about-section">
+        <h1>The BookMall Story</h1>
+        <p>LAUNCHED IN AUGUST 2021 </p>
+        <p>BookMall is the Indian Startup started by the team of two students of JECRC Jaipur </p>
+        <p>BookMall is guided by four principles: customer obsession rather than competitor focus, passion for invention, commitment to operational excellence, and long-term thinking. Amazon strives to be Earth’s most customer-centric company, Earth’s best employer, and Earth’s safest place to work. Customer reviews, 1-Click shopping, personalized recommendations, Prime, Fulfillment by BookMall, AWS, Kindle Direct Publishing, Kindle, Career Choice, Fire tablets, Fire TV, Amazon Echo, Alexa, Just Walk Out technology, Amazon Studios, and The Climate Pledge are some of the things pioneered by Amazon.</p>
+    </div>
+
+    <h2 style="text-align:center">Our Team</h2>
+    <div class="row">
+        <div class="column" style="margin-bottom: 1vw;">
+            <div class="card" style="margin-left: 1.5vw;width: 26vw;">
+                <img src="/static/img/rings.jpg" alt="Jane" style="width:60%;margin: auto;">
+                <div class="container">
+                    <h4 class="text-center">Shubham Choudhary</h4>
+                    <p class="title text-center">CoFounder & Full-Stack Developer</p>
+                    <!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> -->
+                    <a href="#" style="text-decoration: none;"><p class="text-center">shubhamchoudhary@gmail.com</p></a>
+                    <p class="text-center"><a href="#"><button class="btn btn-primary">Contact</button></a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" style="margin-bottom: 1vw;">
+            <div class="card" style="width: 26vw;">
+                <img src="/static/img/shubham.jpg" alt="Mike" style="width:60%;margin: auto;">
+                <div class="container">
+                    <h4 class="text-center">Shubham Khandelwal</h4>
+                    <p class="title text-center">CoFounder & Backend Developer</p>
+                    <!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> -->
+                    <a href="#" style="text-decoration: none;"><p class="text-center">shubhamkhandelwal16102001@gmail.com</p></a>
+                    <p class="text-center"><a href="#"><button class="btn btn-primary">Contact</button></p></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" style="margin-bottom: 1vw;">
+            <div class="card" style="width: 26vw;">
+                <img src="/static/img/rings.jpg" alt="John" style="width:60%;margin: auto;">
+                <div class="container">
+                    <h4 class="text-center">Mohit Goyal</h4>
+                    <p class="title text-center">Founder & Content Designer</p>
+                    <!-- <p>Some text that describes me lorem ipsum ipsum lorem.</p> -->
+                    <a href="#" style="text-decoration: none;"><p class="text-center">mohitgoyal@gmail.com</p></a>
+                    <p class="text-center"><a href="#"><button class="btn btn-primary">Contact</button></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js%} {% endblock %}

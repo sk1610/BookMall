@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/utils.css">
+    <link rel="stylesheet" href="/static/css/login_style.css">
+    <title>{%block title%} {% endblock %}</title>
+
+    <style>
+        .sticky {
+            top: 0;
+            position: fixed;
+        }
+
+            {% block css%}
+
+            {% endblock %}
+    </style>
+</head>
+
+
+
+<body>
+
+    <header>
+        <nav>
+            <div class="logos">
+                <p>Pathshala</p>
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <!-- <li><a href="#">Services</a></li> -->
+                <li><a href="/about">About us</a></li>
+                <li><a href="/sell">Sell</a></li>
+                <li><a href="/contact">Contact us</a></li>
+            </ul>
+            <div class="search">
+                <input type="text" name="" placeholder="    Search  for  any  Book">
+                <button class="btnsearch">Search</button>
+            </div>
+
+            {% if user.is_authenticated %}
+            <li class="drop dropdown">
+                <a href="#">Hello,{{user.username}}</a>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Rewards</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </li>
+            <ul style="background-color: var(--main-bg-color);">
+                <li style="margin-left: 3vw;">
+                    <form action="/cartbtn" method="POST">
+                        {% csrf_token %}
+                        <input hidden type="text" name = "productid" id="productid" value="">
+                        <button type="submit" style="background: none;border: none;">
+                            <img style="width: 45px;height: 40px;" src="/static/img/crtimg-removebg-preview.png" alt="">
+                            <span style="color: yellow;position: absolute;" id='cart'>0</span>
+                        </a>
+                    </form>
+                </li>
+            </ul>
+            {% else %}
+            <li class="drop dropdown">
+                <a href="/login">Login</a>
+                <div class="dropdown-content">
+                    <a href="/signup">New Customer? Signup</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Rewards</a>
+                </div>
+            </li>
+            <ul style="background-color: var(--main-bg-color);">
+                <li style="margin-left: 3vw;"><a title="Header" data-toggle="popover" data-trigger="hover"
+                        data-content="Some content" href="/login"><img style="width: 45px;height: 40px;"
+                            src="/static/img/crtimg-removebg-preview.png" alt=""><span
+                            style="color: yellow;position: absolute;" id='cart'>0</span></a></li>
+            </ul>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block mains %}{% endblock %}
+    </main>
+
+
+
+    <script>
+        window.onscroll = function () { myFunction() };
+        // Get the navbar
+        var navbar = document.getElementsByTagName("nav");
+
+        // Get the offset position of the navbar
+        var sticky = navbar[0].offsetTop;
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar[0].classList.add("sticky")
+            } else {
+                navbar[0].classList.remove("sticky");
+            }
+        }
+
+        {% comment %} console.log("Working"); {% endcomment %}
+        if (localStorage.getItem('cart') == null) {
+            var cart = {};
+        }
+        else {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        }
+        document.getElementById('productid').value = JSON.stringify(cart);
+
+        $('.cart').click(function () {
+            var bookid = this.id.toString();
+            console.log(bookid);
+            if (cart[bookid] != undefined)
+                cart[bookid] = cart[bookid] + 1;
+            else
+                cart[bookid] = 1;
+            console.log(cart);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart').innerHTML = Object.keys(cart).length;
+            document.getElementById('productid').value = JSON.stringify(cart);
+        });
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        {% block js %} {% endblock %}
+    </script>

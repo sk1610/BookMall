@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/utils.css">
+    <link rel="stylesheet" href="/static/css/login_style.css">
+    <title>BookMall</title>
+
+
+    <style>
+        /* .card {
+            max-width: 97.5vw;
+            display: flex;
+            flex-direction: inherit;
+            text-align: center;
+            font: 'Baloo Bhai 2', cursive;
+        } */
+
+
+        .col-md-3 {
+            display: inline-block;
+            margin-left: -4px;
+        }
+
+        .col-md-3 img {
+            width: 100%;
+            height: auto;
+        }
+
+        body .carousel-control-indicator li {
+            background-color: blue;
+        }
+
+        body .carousel-control-prev-icon body .carousel-control-next-icon {
+            background-color: blue;
+        }
+
+        .carousel-control-prev-icon .carousel-control-next-icon {
+            top:auto;
+            bottom: auto;
+        }
+
+        body .no-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .carousel-control-prev-icon {
+            background: black no-repeat center center;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
+        }
+
+        .carousel-control-next-icon {
+            background: black no-repeat center center;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+
+        }
+
+        .carousel-control-next, .carousel-control-prev {
+            width: 1%;
+        }
+
+
+        body .carousel-indicators {
+            bottom: 0;
+        }
+
+        .sticky {
+            top:0;
+            position: fixed;
+        }
+    </style>
+
+
+</head>
+
+<body style="background-color: #f1f3f6;;">
+
+    <header>
+        <nav>
+            <div class="logos">
+                <p>Pathshala</p>
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <!-- <li><a href="#">Services</a></li> -->
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/sell">Sell</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+            <form class="search">
+                <input type="text" name="" placeholder="    Search  for  any  Book">
+                <button class="btnsearch">Search</button>
+            </form>
+
+            {% if user.is_authenticated %}
+            <li class="drop dropdown">
+                <a href="#">Hello {{user.username}}</a>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Rewards</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </li>
+            <!-- <button type="button" class="btn btn-secondary" id="popcart" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-html="true" data-bs-content="Bottom popover" style="background-color: var(--main-bg-color);">
+                <img style="width: 45px;height: 40px;" src="/static/img/crtimg-removebg-preview.png" alt=""><span style="color: yellow;position: absolute;" id='cart'>0</span>
+              </button> -->
+              <ul style="background-color: var(--main-bg-color);">
+                <li style="margin-left: 3vw;">
+                    <form action="/cartbtn" method="POST">
+                        {% csrf_token %}
+                        <input hidden type="text" name = "productid" id="productid" value="">
+                        <button type="submit" style="background: none;border: none;">
+                            <img style="width: 45px;height: 40px;" src="/static/img/crtimg-removebg-preview.png" alt="">
+                            <span style="color: yellow;position: absolute;" id='cart'>0</span>
+                        </a>
+                    </form>
+                </li>
+            </ul>
+            <!-- <ul style="background-color: var(--main-bg-color);"><li onclick="myfunction()" style="margin-left: 3vw;"><a href="/cartbtn"><img style="width: 45px;height: 40px;" src="/static/img/crtimg-removebg-preview.png" alt=""><span style="color: yellow;position: absolute;" id='cart'>0</span></a></li></ul> -->
+            {% else %}
+            <li class="drop dropdown">
+                <a href="/login">Login</a>
+                <div class="dropdown-content">
+                    <a href="/signup">New Customer? Signup</a>
+                    <a href="#">Bookings</a>
+                    <a href="#">Rewards</a>
+                </div>
+            </li>
+            <!-- <ul style="background-color: var(--main-bg-color);">
+                <li style="margin-left: 3vw;">
+                    <form action="/cartbtn" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name = "productid" id="productid" value="">
+                        <button type="submit">
+                            <img style="width: 45px;height: 40px;" src="/static/img/crtimg-removebg-preview.png" alt="">
+                            <span style="color: yellow;position: absolute;" id='cart'>0</span>
+                        </a>
+                    </form>
+                </li>
+            </ul> -->
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        <div class="containers my-3" style="z-index: -1;">
+
+            <div class="container-fluid">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="max-height: 25vw;">
+                            <img src="/static/img/book4.jfif" class="d-block w-100"
+                                alt="...">
+                        </div>
+                        <div class="carousel-item" style="max-height: 25vw;">
+                            <img src="/static/img/book3.jfif" class="d-block w-100"
+                                alt="...">
+                        </div>
+                        <div class="carousel-item" style="max-height: 25vw;">
+                            <img src="/static/img/book1.jfif" class="d-block w-100"
+                                alt="...">
+                        </div>
+                        <div class="carousel-item" style="max-height: 25vw;">
+                            <img src="/static/img/book2.jfif" class="d-block w-100"
+                                alt="...">
+                        </div>
+                    </div>
+                    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button> -->
+                </div>
+            </div>
+
+            {% for product, range, slides in allProduct %}
+            <div class="container mt-3">
+                <div>
+                    <p class="card-text">{{product.0.book_category}}</p>
+                </div>
+                <div id="demo{{forloop.counter}}" class="carousel slide" data-bs-ride="carousel" style="width: 90vw;">
+                    <!-- <ul class="carousel-indicators">
+                        <li data-bs-target="#demo" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#demo" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#demo" data-bs-slide-to="2"></li>
+                    </ul> -->
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/media/{{product.0.book_image}}" class="card-img-top" alt="..." style="width: 200px;height: 230px;margin: 10px auto;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center" style="font-size: 15px;color: rgb(6, 64, 224);">{{product.0.book_name}}</h5>
+                                        <p class="card-text text-center" style="font-size: 13px;padding: 0px 20px;">{{product.0.book_author}}</p>
+                                        <span id="mybook{{product.0.id}}" class="mybook" style="margin-left: 4.5vw;"><button class="btn btn-outline-primary cart" id="book{{product.0.id}}">Add To Cart</button></span>
+                                        <a href="/book/{{product.0.id}}"><button class="btn btn-outline-primary cart" style="margin-left: 4.5rem;margin-top: 1rem;">Quick View</button></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% for i in product|slice:"1:" %}
+                            <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/media/{{i.book_image}}" class="card-img-top" alt="..." style="width: 200px;height: 230px;margin: 10px auto;">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center" style="font-size: 15px;color: rgb(6, 64, 224);">{{i.book_name}}</h5>
+                                        <p class="card-text text-center" style="font-size: 12px;padding: 0px 20px;">{{i.book_author}}</p>
+                                        <span id="mybook{{i.id}}" class="mybook" style="margin-left: 4.5vw;"><button class="btn btn-outline-primary cart" id="book{{i.id}}">Add To Cart</button></span>
+                                        <a href="/book/{{i.id}}"><button class="btn btn-outline-primary cart" style="margin-left: 4.5rem;margin-top: 1rem;">Quick View</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if forloop.counter|add:1|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                        </div><div class="carousel-item">
+                            {% endif %}
+                            {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-control-prev"
+                    type="button" data-bs-target="#demo{{forloop.counter}}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" style="width: 1rem; height: 1rem;"
+                        aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next"
+                    type="button" data-bs-target="#demo{{forloop.counter}}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" style="width: 1rem; height: 1rem;"
+                        aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+            <!-- Container Ends Here        -->
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="text-all-center">
+        <p style="padding-top: 15px;">Copyright &AMP; bookmall.com</p>
+    </footer>
+
+    <script>
+        window.onscroll = function () { myFunction() };
+        // Get the navbar
+        var navbar = document.getElementsByTagName("nav");
+
+        // Get the offset position of the navbar
+        var sticky = navbar[0].offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar[0].classList.add("sticky")
+            } else {
+                navbar[0].classList.remove("sticky");
+            }
+        }
+
+        if(localStorage.getItem('cart') == null)
+        {
+        var cart={};
+        }
+        else{
+        cart= JSON.parse(localStorage.getItem('cart'));
+        updateCart(cart)
+        }
+        document.getElementById('productid').value = JSON.stringify(cart);
+
+        $('.mybook').on('click','button.cart',function(){
+        var bookid= this.id.toString();
+        if(cart[bookid] != undefined)
+            cart[bookid] = cart[bookid] + 1;
+        else
+            cart[bookid] = 1;
+        updateCart(cart);
+        console.log(cart)
+        localStorage.setItem('cart',JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        document.getElementById('productid').value = JSON.stringify(cart);
+        });
+
+        function updateCart(cart)
+        {
+            var sum = 0;
+            for(var item in cart)
+            {
+                sum = sum + cart[item]
+                document.getElementById('my'+item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'>+</button>";
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            totalelement = sum;
+            document.getElementById('cart').innerHTML = sum;
+            console.log(cart);
+        }
+
+        $('.mybook').on("click","button.minus",function(){
+            console.log("minus clicked");
+            at = this.id.slice(9, );
+            cart['book' + at] = cart['book' + at] - 1;
+            // cart['book' + at] = Math.max(0, cart['book' + at]);
+            console.log(cart)
+            if(cart['book'+at] == 0){
+                cart= JSON.parse(localStorage.getItem('cart'));
+                delete cart['book'+at];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                document.getElementById('my'+'book'+at).innerHTML = '<button id="' + "book" + at + '" class="btn btn-primary cart">Add To Cart</button>';
+                updateCart(cart)
+            }
+            else{
+                document.getElementById('valbook' + at).innerHTML = cart['book' + at];
+                updateCart(cart);
+            }
+        });
+        $('.mybook').on("click","button.plus",function(){
+            console.log("plus clicked");
+            a = this.id.slice(8, );
+            cart['book' + a] = cart['book' + a] + 1;
+            document.getElementById('valbook' + a).innerHTML = cart['book' + a];
+            updateCart(cart);
+        });
+        function myfunction(cart)
+        {
+            console.log("Hello");
+                $.ajax({
+            type: "GET",
+            url: '/cartbtn',
+            data: {
+                "result": cart,
+            },
+            dataType: "json",
+            success: function (data) {
+                // any process in data
+                alert("successfull")
+            },
+            failure: function () {
+                alert("failure");
+        }
+    });
+        }
+
+    </script>
+
+</body>
+
+</html>
